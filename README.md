@@ -2,18 +2,17 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
     </a>
-    <h1 align="center">Yii _____</h1>
-    <br>
 </p>
+<h1 align="center">Yii Message Extractor</h1>
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/_____/v/stable.png)](https://packagist.org/packages/yiisoft/_____)
-[![Total Downloads](https://poser.pugx.org/yiisoft/_____/downloads.png)](https://packagist.org/packages/yiisoft/_____)
-[![Build status](https://github.com/yiisoft/_____/workflows/build/badge.svg)](https://github.com/yiisoft/_____/actions?query=workflow%3Abuild)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiisoft/_____/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/_____/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/yiisoft/_____/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/_____/?branch=master)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyiisoft%2F_____%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/yiisoft/_____/master)
-[![static analysis](https://github.com/yiisoft/_____/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/_____/actions?query=workflow%3A%22static+analysis%22)
-[![type-coverage](https://shepherd.dev/github/yiisoft/_____/coverage.svg)](https://shepherd.dev/github/yiisoft/_____)
+[![Latest Stable Version](https://poser.pugx.org/yiisoft/translator-extractor/v/stable.png)](https://packagist.org/packages/yiisoft/translator-extractor)
+[![Total Downloads](https://poser.pugx.org/yiisoft/translator-extractor/downloads.png)](https://packagist.org/packages/yiisoft/translator-extractor)
+[![Build status](https://github.com/yiisoft/translator-extractor/workflows/build/badge.svg)](https://github.com/yiisoft/translator-extractor/actions?query=workflow%3Abuild)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiisoft/translator-extractor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/translator-extractor/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/yiisoft/translator-extractor/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/translator-extractor/?branch=master)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyiisoft%2Ftranslator-extractor%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/yiisoft/translator-extractor/master)
+[![static analysis](https://github.com/yiisoft/translator-extractor/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/translator-extractor/actions?query=workflow%3A%22static+analysis%22)
+[![type-coverage](https://shepherd.dev/github/yiisoft/translator-extractor/coverage.svg)](https://shepherd.dev/github/yiisoft/translator-extractor)
 
 The package ...
 
@@ -26,10 +25,73 @@ The package ...
 The package could be installed with composer:
 
 ```shell
-composer require yiisoft/_____ --prefer-dist
+composer require yiisoft/translator-extractor --prefer-dist
 ```
 
 ## General usage
+
+```ssh
+php yii translator/extract
+```
+This command founded all messages in current directory and save for default language `en`
+
+```ssh
+php yii translator/extract /path/to/your/project
+```
+With specifying path to project
+
+### Specify languages for extract
+
+Specify two languages
+```ssh
+php yii translator/extract --languages=en,ru
+```
+Or in short format
+```ssh
+php yii translator/extract -Lru
+```
+
+### Using `except` option
+
+For exclude directory `vendor`
+```ssh
+php yii translator/extract --except=**/vendor/**
+```
+
+For exclude directories `vendor` && `tests`
+```ssh
+php yii translator/extract --except=**/vendor/** --except=**/tests/**
+```
+
+### Using `only` option
+
+Parse only from files `test.php`
+```ssh
+php yii translator/extract --only=**/test.php
+```
+
+Parse only from concrete file `/var/www/html/test.php`
+```ssh
+php yii translator/extract --only=/var/www/html/test.php
+```
+
+## For Gettext
+
+Package not supported extract to gettext format. For extract messages to gettext files, you may using this shell script (in linux-based OS)
+```ssh
+find src/ -name *.php | xargs xgettext --from-code=utf-8 --language=PHP --no-location --omit-header --sort-output --keyword=translate --output="locales/category.pot"
+
+for d in locales/*/ ; do
+    for i in locales/*.pot; do
+        if [ ! -f "$d$(basename "$i" .pot).po" ]; then
+            touch "$d$(basename "$i" .pot).po"
+        fi
+
+        msgmerge --update --silent --backup=off "$d$(basename "$i" .pot).po" $i
+    done
+done
+```
+For more info - read discussion for [this PR](https://github.com/yiisoft/translator-message-gettext/pull/24)
 
 ## Testing
 
@@ -60,7 +122,7 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 
 ## License
 
-The Yii _____ is free software. It is released under the terms of the BSD License.
+The Yii translator extractor is free software. It is released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
