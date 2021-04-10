@@ -54,7 +54,7 @@ final class Extractor
         $messagesList = $translationExtractor->extract($defaultCategory);
 
         if (empty($messagesList)) {
-            $output->writeln('<comment>Messages not founds</comment>');
+            $output->writeln('<comment>Messages not found</comment>');
             return;
         }
 
@@ -65,7 +65,7 @@ final class Extractor
          * @var array<array-key, array<string, string>|mixed> $messages
          */
         foreach ($messagesList as $categoryName => $messages) {
-            $output->writeln('<info>Category: "' . $categoryName . '", found messages: ' . count($messages) . '</info>');
+            $output->writeln('<info>Category: "' . $categoryName . '", messages found: ' . count($messages) . '</info>');
 
             /** @var array<string, array<string, string>> $convertedMessages */
             $convertedMessages = $this->convert($messages);

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Yiisoft\Translator\Extractor\Tests;
 
-use Yiisoft\Translator\Extractor\Command\ExtractCommand;
-use Yiisoft\Translator\Extractor\Extractor;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Psr\Container\ContainerInterface;
+use Yiisoft\Translator\Extractor\Command\ExtractCommand;
+use Yiisoft\Translator\Extractor\Extractor;
 use Yiisoft\Di\Container;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
 use Yiisoft\Yii\Console\Application;
-use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 
 final class ExtractCommandTest extends TestCase
 {
     private ContainerInterface $container;
     private Application $application;
-    private $command;
+    private CommandTester $command;
 
     protected function setUp(): void
     {
@@ -46,7 +46,7 @@ final class ExtractCommandTest extends TestCase
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty']);
         $output = $this->command->getDisplay();
-        $this->assertStringContainsString('Category: "app", found messages: 2', $output);
+        $this->assertStringContainsString('Category: "app", messages found: 2', $output);
     }
 
     public function testExcept(): void
@@ -67,22 +67,19 @@ final class ExtractCommandTest extends TestCase
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty', '--category' => 'app2']);
         $output = $this->command->getDisplay();
-
-        $this->assertStringContainsString('Category: "app2", found messages: 2', $output);
+        $this->assertStringContainsString('Category: "app2", messages found: 2', $output);
     }
 
     public function testSimpleWithSettedLanguages(): void
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty', '-L' => 'ru,en']);
         $output = $this->command->getDisplay();
-
         $this->assertStringContainsString('Languages: ru, en', $output);
     }
 
     protected function configContainer(): void
     {
         $this->container = new Container($this->config());
-
         $this->application = $this->container->get(Application::class);
 
         $loader = new ContainerCommandLoader(

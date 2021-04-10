@@ -32,10 +32,10 @@ final class ExtractCommand extends Command
     {
         $this
             ->setDescription('Extracts translator IDs from files.')
-            ->addOption('languages', 'L', InputOption::VALUE_REQUIRED, 'Created languages. By default `en`', 'en')
+            ->addOption('languages', 'L', InputOption::VALUE_REQUIRED, 'Creating translations for languages. By default only `en`.', 'en')
             ->addOption('category', 'C', InputOption::VALUE_REQUIRED, 'Default category for unsetted category messages.', $this->defaultCategory)
-            ->addOption('except', 'E', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Excluded path from extracting', [])
-            ->addOption('only', 'O', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Only path from extracting', [])
+            ->addOption('except', 'E', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Exclude path from extracting.', [])
+            ->addOption('only', 'O', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Only path from extracting.', [])
             ->addArgument('path', InputArgument::OPTIONAL, 'Path for extracts message IDs.')
             ->setHelp('This command Extracts translator IDs from files within a given path.');
     }

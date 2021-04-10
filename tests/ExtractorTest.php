@@ -4,26 +4,21 @@ declare(strict_types=1);
 
 namespace Yiisoft\Translator\Extractor\Tests;
 
-use Symfony\Component\Console\Command\Command;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yiisoft\Translator\Extractor\Command\ExtractCommand;
 use Yiisoft\Translator\Extractor\Extractor;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Tester\CommandTester;
-use Psr\Container\ContainerInterface;
-use Yiisoft\Di\Container;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
-use Yiisoft\Yii\Console\Application;
-use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 
 final class ExtractorTest extends TestCase
 {
     private Extractor $extractor;
-    private $messageSource;
     private ConsoleOutputInterface $output;
+
+    /** @var MessageReaderInterface|MessageWriterInterface */
+    private $messageSource;
 
     private array $correctMessages = [
         'test' => ['message' => 'test'],
@@ -99,9 +94,7 @@ final class ExtractorTest extends TestCase
         $language = 'en';
 
         $this->messageSource->messages = [$categoryName => [$language => $this->changedMessages]];
-
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
-
         $this->assertEquals('test_changed', $this->messageSource->getMessage('test', $categoryName, $language));
     }
 
