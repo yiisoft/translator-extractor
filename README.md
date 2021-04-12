@@ -33,16 +33,15 @@ composer require yiisoft/translator-extractor --prefer-dist
 ```ssh
 php yii translator/extract
 ```
-This command founded all messages in current directory and save for default language `en`
+This command will recursively find all messages in the code starting with current directory and will save it into message source for default language `en`. You can specify path exclicitly:
 
 ```ssh
 php yii translator/extract /path/to/your/project
 ```
-With specifying path to project
 
 ### Specify languages for extract
 
-Specify two languages
+You can specify multiple languages
 ```ssh
 php yii translator/extract --languages=en,ru
 ```
@@ -53,31 +52,32 @@ php yii translator/extract -Lru
 
 ### Using `except` option
 
-For exclude directory `vendor`
+To exclude `vendor` directory use `--except`:
 ```ssh
 php yii translator/extract --except=**/vendor/**
 ```
 
-For exclude directories `vendor` && `tests`
+To exclude both `vendor` and `tests` directories:
 ```ssh
 php yii translator/extract --except=**/vendor/** --except=**/tests/**
 ```
 
 ### Using `only` option
 
-Parse only from files `test.php`
+To parse only `test.php` files use `--only` option:
 ```ssh
 php yii translator/extract --only=**/test.php
 ```
 
-Parse only from concrete file `/var/www/html/test.php`
+To parse only `/var/www/html/test.php` file use:
 ```ssh
 php yii translator/extract --only=/var/www/html/test.php
 ```
 
 ## For Gettext
 
-Package not supported extract to gettext format. For extract messages to gettext files, you may using this shell script (in linux-based OS)
+The package does not support extracting messages into gettext format. To extract messages for gettext, you may use the following shell script (in linux-based OS):
+
 ```ssh
 find src/ -name *.php | xargs xgettext --from-code=utf-8 --language=PHP --no-location --omit-header --sort-output --keyword=translate --output="locales/category.pot"
 
@@ -90,8 +90,6 @@ for d in locales/*/ ; do
         msgmerge --update --silent --backup=off "$d$(basename "$i" .pot).po" $i
     done
 done
-```
-For more info - read discussion for [this PR](https://github.com/yiisoft/translator-message-gettext/pull/24)
 
 ## Testing
 
