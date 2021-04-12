@@ -97,8 +97,8 @@ final class ExtractCommandTest extends TestCase
         return [
             Extractor::class => [
                 '__construct()' => [
-                'messageReader' => $this->getMessageSource(),
-                'messageWriter' => $this->getMessageSource(),
+                    'messageReader' => $this->getMessageSource(),
+                    'messageWriter' => $this->getMessageSource(),
                 ],
             ],
         ];

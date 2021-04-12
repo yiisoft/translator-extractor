@@ -22,7 +22,8 @@ final class ExtractCommand extends Command
 
     private Extractor $extractor;
 
-    public function __construct(Extractor $extractor) {
+    public function __construct(Extractor $extractor)
+    {
         self::$defaultName = 'translator/extract';
         $this->extractor = $extractor;
         parent::__construct();

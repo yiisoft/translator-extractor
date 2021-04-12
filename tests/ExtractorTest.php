@@ -83,7 +83,7 @@ final class ExtractorTest extends TestCase
             $categoryName =>
                 [
                     $language1 => $this->correctMessages,
-                    $language2 => $this->correctMessages
+                    $language2 => $this->correctMessages,
                 ],
         ], $this->messageSource->messages);
     }
