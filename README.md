@@ -28,57 +28,113 @@ The package could be installed with composer:
 composer require yiisoft/translator-extractor --prefer-dist
 ```
 
+## Configuration
+
+You need configure MessageReader and MessageWriter in config file of package:
+
+`config/packages/yiisoft/translator-extractor/console.php`
+
+For example: with usages PHP MessageSource
+```php
+return [
+    Extractor::class => [
+        '__construct()' => [
+            'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
+            'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
+        ],
+    ],
+];
+```
+
 ## General usage
 
-```ssh
+```shell
 php yii translator/extract
 ```
-This command will recursively find all messages in the code starting with current directory and will save it into message source for default language `en`. You can specify path exclicitly:
 
-```ssh
+This command will recursively find all messages in the code starting with current directory and will save it into
+message source for default language `en`. You can specify path exclicitly:
+
+```shell
 php yii translator/extract /path/to/your/project
+```
+
+Full list of options:
+
+```shell
+Usage:
+  translator/extract [options] [--] [<path>]
+
+Arguments:
+  path                       Path for extracting message IDs.
+
+Options:
+  -L, --languages=LANGUAGES  Comma separated list of languages to write message sources for. By default it is `en`. [default: "en"]
+  -C, --category=CATEGORY    Default message category to use when category is not set. [default: "app"]
+  -E, --except[=EXCEPT]      Exclude path from extracting. (multiple values allowed)
+  -O, --only[=ONLY]          Use the only specified path for extracting. (multiple values allowed)
+
 ```
 
 ### Specify languages for extract
 
 You can specify multiple languages
-```ssh
+
+```shell
 php yii translator/extract --languages=en,ru
 ```
+
 Or in short format
-```ssh
+
+```shell
 php yii translator/extract -Lru
 ```
+
+### Specify default category
+
+Also you can specify default message category to use when category is not set.
+
+```shell
+php yii translator/extract --category=your_category_name
+```
+
 
 ### Using `except` option
 
 To exclude `vendor` directory use `--except`:
-```ssh
+
+```shell
 php yii translator/extract --except=**/vendor/**
 ```
 
 To exclude both `vendor` and `tests` directories:
-```ssh
+
+```shell
 php yii translator/extract --except=**/vendor/** --except=**/tests/**
 ```
 
 ### Using `only` option
 
 To parse only `test.php` files use `--only` option:
-```ssh
+
+```shell
 php yii translator/extract --only=**/test.php
 ```
 
 To parse only `/var/www/html/test.php` file use:
-```ssh
+
+```shell
 php yii translator/extract --only=/var/www/html/test.php
 ```
 
+For more info about `except` and `only` parameters - you may reading in [documentation of module yiisoft/files](https://github.com/yiisoft/files)
+
 ## For Gettext
 
-The package does not support extracting messages into gettext format. To extract messages for gettext, you may use the following shell script (in linux-based OS):
+The package does not support extracting messages into gettext format. To extract messages for gettext, you may use the
+following shell script (in linux-based OS):
 
-```ssh
+```shell
 find src/ -name *.php | xargs xgettext --from-code=utf-8 --language=PHP --no-location --omit-header --sort-output --keyword=translate --output="locales/category.pot"
 
 for d in locales/*/ ; do
@@ -90,6 +146,7 @@ for d in locales/*/ ; do
         msgmerge --update --silent --backup=off "$d$(basename "$i" .pot).po" $i
     done
 done
+```
 
 ## Testing
 
@@ -120,8 +177,8 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 
 ## License
 
-The Yii translator extractor is free software. It is released under the terms of the BSD License.
-Please see [`LICENSE`](./LICENSE.md) for more information.
+The Yii translator extractor is free software. It is released under the terms of the BSD License. Please
+see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
 
