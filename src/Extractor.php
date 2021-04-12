@@ -30,7 +30,9 @@ final class Extractor
      */
     public function setExcept(array $except): void
     {
-        $this->except = $except;
+        if (!empty($except)) {
+            $this->except = $except;
+        }
     }
 
     /**
@@ -38,7 +40,9 @@ final class Extractor
      */
     public function setOnly(array $only): void
     {
-        $this->only = $only;
+        if (!empty($only)) {
+            $this->only = $only;
+        }
     }
 
     /**
