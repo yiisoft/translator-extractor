@@ -14,7 +14,8 @@
 [![static analysis](https://github.com/yiisoft/translator-extractor/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/translator-extractor/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/translator-extractor/coverage.svg)](https://shepherd.dev/github/yiisoft/translator-extractor)
 
-The package ...
+The package allows automatically extracting translation IDs from PHP source files and writing them to
+[one of the translator message sources](https://github.com/yiisoft/translator#message-sources).
 
 ## Requirements
 
@@ -30,17 +31,20 @@ composer require yiisoft/translator-extractor --prefer-dist
 
 ## Configuration
 
-You need configure MessageReader and MessageWriter in config file of package:
+You need configure `MessageReader` and `MessageWriter` in config file of the package:
 
 `config/packages/yiisoft/translator-extractor/console.php`
 
-For example: with usages PHP MessageSource
+For example, when using PHP `MessageSource` the config will be the following:
+
 ```php
+use \Yiisoft\Translator\Message\Php\MessageSource;
+
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
-            'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
+            'messageReader' => static fn () => new MessageSource(dirname(__DIR__, 5) . '/messages'),
+            'messageWriter' => static fn () => new MessageSource(dirname(__DIR__, 5) . '/messages'),
         ],
     ],
 ];
@@ -52,8 +56,8 @@ return [
 php yii translator/extract
 ```
 
-This command will recursively find all messages in the code starting with current directory and will save it into
-message source for default language `en`. You can specify path exclicitly:
+This command will recursively find all messages in the code starting with the current directory and will save it into
+a message source for default language `en`. You can specify the path explicitly:
 
 ```shell
 php yii translator/extract /path/to/your/project
@@ -76,23 +80,25 @@ Options:
 
 ```
 
-### Specify languages for extract
 
-You can specify multiple languages
+### Specify languages
+
+You can specify multiple languages to write IDs into:
 
 ```shell
 php yii translator/extract --languages=en,ru
 ```
 
-Or in short format
+Or in short format:
 
 ```shell
 php yii translator/extract -Lru
 ```
 
+
 ### Specify default category
 
-Also you can specify default message category to use when category is not set.
+Also, you can specify default message category to use when category is not set.
 
 ```shell
 php yii translator/extract --category=your_category_name
@@ -107,7 +113,7 @@ To exclude `vendor` directory use `--except`:
 php yii translator/extract --except=**/vendor/**
 ```
 
-To exclude both `vendor` and `tests` directories:
+To exclude both `vendor` and `tests` directories the following options could be used:
 
 ```shell
 php yii translator/extract --except=**/vendor/** --except=**/tests/**
@@ -115,7 +121,7 @@ php yii translator/extract --except=**/vendor/** --except=**/tests/**
 
 ### Using `only` option
 
-To parse only `test.php` files use `--only` option:
+To parse only `test.php` files in any directory use `--only` option:
 
 ```shell
 php yii translator/extract --only=**/test.php
@@ -127,12 +133,13 @@ To parse only `/var/www/html/test.php` file use:
 php yii translator/extract --only=/var/www/html/test.php
 ```
 
-For more info about `except` and `only` parameters - you may reading in [documentation of module yiisoft/files](https://github.com/yiisoft/files)
+For more info about `except` and `only` parameters check documentation of
+[yiisoft/files package](https://github.com/yiisoft/files).
 
-## For Gettext
+## Working with gettext
 
-The package does not support extracting messages into gettext format. To extract messages for gettext, you may use the
-following shell script (in linux-based OS):
+The package currently does not support extracting messages into gettext format. To extract messages for gettext,
+you may use the following shell script (in Linux-based OS):
 
 ```shell
 find src/ -name *.php | xargs xgettext --from-code=utf-8 --language=PHP --no-location --omit-header --sort-output --keyword=translate --output="locales/category.pot"
