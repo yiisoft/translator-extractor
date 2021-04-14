@@ -10,15 +10,15 @@ return [
     Extractor::class => [
         '__construct()' => [
             // Please set the following to use extractor
-            'messageReader' => function () {
-                throw new \RuntimeException('You can configure MessageReader');
+            'messageReader' => static function () {
+                throw new \RuntimeException('You should configure MessageReader.');
             },
-            'messageWriter' => function () {
-                throw new \RuntimeException('You can configure MessageWriter');
+            'messageWriter' => static function () {
+                throw new \RuntimeException('You should  configure MessageWriter.');
             },
             // For example we use PHP message Source
-            // 'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
-            // 'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(getcwd() . '/messages'),
+            // 'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(dirname(__DIR__, 5) . '/messages'),
+            // 'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(dirname(__DIR__, 5) . '/messages'),
         ],
     ],
 ];

@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Yiisoft\Translator\Extractor;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use Yiisoft\Files\PathMatcher\PathMatcher;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
 
+/**
+ * Extracts translator IDs from files within a given path and writes them into message source given merging
+ * results with what is already there.
+ */
 final class Extractor
 {
     private MessageWriterInterface $messageWriter;
@@ -26,6 +31,9 @@ final class Extractor
     }
 
     /**
+     * Set list of patterns that the files or directories should not match.
+     *
+     * @see PathMatcher
      * @param string[] $except
      */
     public function setExcept(array $except): void
@@ -36,6 +44,9 @@ final class Extractor
     }
 
     /**
+     * Set list of patterns that the files or directories should match.
+     *
+     * @see PathMatcher
      * @param string[] $only
      */
     public function setOnly(array $only): void
@@ -46,9 +57,9 @@ final class Extractor
     }
 
     /**
-     * @param string $filesPath
-     * @param string $defaultCategory
-     * @param string[] $languages
+     * @param string $filesPath Path to files to extract from.
+     * @param string $defaultCategory Category to use if category isn't set in translation call.
+     * @param string[] $languages Languages to write extracted IDs to.
      * @param OutputInterface $output
      */
     public function process(string $filesPath, string $defaultCategory, array $languages, OutputInterface $output): void

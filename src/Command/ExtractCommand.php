@@ -13,6 +13,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Translator\Extractor\Extractor;
 use Yiisoft\Yii\Console\ExitCode;
 
+/**
+ * Console command that allows extracting translator IDs from files.
+ */
 final class ExtractCommand extends Command
 {
     /** @var string|null */
