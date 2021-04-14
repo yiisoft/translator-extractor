@@ -34,6 +34,7 @@ final class Extractor
      * Set list of patterns that the files or directories should not match.
      *
      * @see PathMatcher
+     *
      * @param string[] $except
      */
     public function setExcept(array $except): void
@@ -47,6 +48,7 @@ final class Extractor
      * Set list of patterns that the files or directories should match.
      *
      * @see PathMatcher
+     *
      * @param string[] $only
      */
     public function setOnly(array $only): void
