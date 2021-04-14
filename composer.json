@@ -1,43 +1,57 @@
 {
-    "name": "yiisoft/replace-with-package-name",
+    "name": "yiisoft/translator-extractor",
     "type": "library",
-    "description": "_____",
+    "description": "Yii message extractor",
     "keywords": [
-        "_____"
+        "i18n",
+        "internationalization",
+        "extractor"
     ],
     "homepage": "https://www.yiiframework.com/",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/_____/issues?state=open",
+        "issues": "https://github.com/yiisoft/translator-extractor/issues?state=open",
         "forum": "https://www.yiiframework.com/forum/",
         "wiki": "https://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/_____"
+        "source": "https://github.com/yiisoft/translator-extractor"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "yiisoft/yii-console": "^3.0@dev",
+        "yiisoft/translator": "^3.0@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "roave/infection-static-analysis-plugin": "^1.6",
         "spatie/phpunit-watcher": "^1.23",
-        "vimeo/psalm": "^4.3"
+        "vimeo/psalm": "^4.3",
+        "yiisoft/di": "^3.0@dev",
+        "yiisoft/translator": "^3.0@dev",
+        "yiisoft/yii-console": "^3.0@dev"
     },
     "autoload": {
         "psr-4": {
-            "Yiisoft\\_____\\": "src"
+            "Yiisoft\\Translator\\Extractor\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yiisoft\\_____\\Tests\\": "tests"
+            "Yiisoft\\Translator\\Extractor\\Tests\\": "tests"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "3.0.x-dev"
+        },
+        "config-plugin-options": {
+            "source-directory": "config"
+        },
+        "config-plugin": {
+            "params": "params.php",
+            "console": "console.php"
         }
     },
     "config": {
