@@ -9,16 +9,16 @@ use Yiisoft\Translator\Extractor\Extractor;
 return [
     Extractor::class => [
         '__construct()' => [
-            // Please set the following to use extractor
+            // Please set the following to use extractor. MessageReader and MessageWriter should be set to SAME MessageSource (One folder in PHP MessageSource)
             'messageReader' => static function () {
                 throw new \RuntimeException('You should configure MessageReader.');
             },
             'messageWriter' => static function () {
-                throw new \RuntimeException('You should  configure MessageWriter.');
+                throw new \RuntimeException('You should configure MessageWriter.');
             },
-            // For example we use PHP message Source
-            // 'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(dirname(__DIR__, 5) . '/messages'),
-            // 'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource(dirname(__DIR__, 5) . '/messages'),
+            // For example we use PHP MessageSource
+            // 'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource($params['yiisoft/translator']['categorySources']),
+            // 'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource($params['yiisoft/translator']['categorySources']),
         ],
     ],
 ];
