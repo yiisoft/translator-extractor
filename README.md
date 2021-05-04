@@ -49,7 +49,9 @@ return [
     ],
 ];
 ```
+
 And in file params.php you can config parameters of message source (if needed)
+
 ```php
 return [
     'yiisoft/yii-console' => [
@@ -66,6 +68,7 @@ return [
     ],
 ];
 ```
+
 **Attention: MessageReader and MessageWriter should be configured for using SAME MessageSource (One folder in PHP MessageSource).**
 **The extractor needs this to work with existing messages.**
 

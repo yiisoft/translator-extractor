@@ -16,9 +16,6 @@ return [
             'messageWriter' => static function () {
                 throw new \RuntimeException('You should configure MessageWriter.');
             },
-            // For example we use PHP MessageSource
-            // 'messageReader' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource($params['yiisoft/translator']['categorySources']),
-            // 'messageWriter' => fn () => new \Yiisoft\Translator\Message\Php\MessageSource($params['yiisoft/translator']['categorySources']),
         ],
     ],
 ];
