@@ -43,12 +43,33 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => static fn () => new MessageSource(dirname(__DIR__, 5) . '/messages'),
-            'messageWriter' => static fn () => new MessageSource(dirname(__DIR__, 5) . '/messages'),
+            'messageReader' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
+            'messageWriter' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
         ],
     ],
 ];
 ```
+
+And in `params.php` file you can configure parameters of a message source:
+
+```php
+return [
+    'yiisoft/yii-console' => [
+        'commands' => [
+            'translator/extract' => ExtractCommand::class,
+        ],
+    ],
+    'yiisoft/translator-extractor' => [
+        // Using relative path:
+        'messagePath' => dirname(__DIR__, 5) . '/messages',
+         
+        // Usage aliases:
+        // 'messagePath' => fn (Aliases $aliases) => $aliases->get('@message'), 
+    ],
+];
+```
+
+> **Attention**: Both `MessageReader` and `MessageWriter` should be configured for using _the same_ `MessageSource`. The extractor needs it to work with existing messages.
 
 ## General usage
 
