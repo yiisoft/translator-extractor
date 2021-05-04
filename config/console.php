@@ -9,7 +9,8 @@ use Yiisoft\Translator\Extractor\Extractor;
 return [
     Extractor::class => [
         '__construct()' => [
-            // Please set the following to use extractor. MessageReader and MessageWriter should be set to SAME MessageSource (One folder in PHP MessageSource)
+            // Please set the following to use extractor.
+            // MessageReader and MessageWriter should be set to the SAME MessageSource.
             'messageReader' => static function () {
                 throw new \RuntimeException('You should configure MessageReader.');
             },
