@@ -43,8 +43,8 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
-            'messageWriter' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
+            'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator']['categorySources'])),
+            'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator']['categorySources'])),
         ],
     ],
 ];
@@ -64,7 +64,7 @@ return [
         'messagePath' => dirname(__DIR__, 5) . '/messages',
          
         // Usage aliases:
-        // 'messagePath' => fn (Aliases $aliases) => $aliases->get('@message'), 
+        // 'messagePath' => DynamicReference::to(fn (Aliases $aliases) => $aliases->get('@message')), 
     ],
 ];
 ```
