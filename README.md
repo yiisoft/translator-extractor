@@ -43,8 +43,8 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator']['categorySources'])),
-            'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator']['categorySources'])),
+            'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
+            'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
         ],
     ],
 ];
