@@ -35,7 +35,7 @@ You need configure `MessageReader` and `MessageWriter` in config file of the pac
 
 `config/packages/yiisoft/translator-extractor/console.php`
 
-For example, when using PHP `MessageSource` the config will be the following:
+For example, when using PHP `MessageSource` the config will be the following using **relative path**:
 
 ```php
 use \Yiisoft\Translator\Message\Php\MessageSource;
@@ -43,8 +43,8 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
-            'messageWriter' => static fn () => new MessageSource($params['yiisoft/translator']['categorySources']),
+            'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
+            'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
         ],
     ],
 ];
@@ -62,12 +62,25 @@ return [
     'yiisoft/translator-extractor' => [
         // Using relative path:
         'messagePath' => dirname(__DIR__, 5) . '/messages',
-         
-        // Usage aliases:
-        // 'messagePath' => fn (Aliases $aliases) => $aliases->get('@message'), 
     ],
 ];
 ```
+
+Or if with using  PHP `MessageSource` the config will be the following **using Aliases**:
+
+```php
+use \Yiisoft\Translator\Message\Php\MessageSource;
+
+return [
+    Extractor::class => [
+        '__construct()' => [
+            'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+            'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+        ],
+    ],
+];
+```
+
 
 > **Attention**: Both `MessageReader` and `MessageWriter` should be configured for using _the same_ `MessageSource`. The extractor needs it to work with existing messages.
 
