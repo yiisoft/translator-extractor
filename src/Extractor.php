@@ -24,6 +24,10 @@ final class Extractor
     /** @var string[]|null */
     private ?array $only = null;
 
+    /**
+     * @param MessageReaderInterface $messageReader Message reader to get messages from.
+     * @param MessageWriterInterface $messageWriter Message writer to write messages to.
+     */
     public function __construct(MessageReaderInterface $messageReader, MessageWriterInterface $messageWriter)
     {
         $this->messageReader = $messageReader;
