@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Yiisoft\Factory\Definition\DynamicReference;
+use Yiisoft\Definitions\DynamicReference;
 use Yiisoft\Translator\Extractor\Extractor;
 
 /** @var array $params */
