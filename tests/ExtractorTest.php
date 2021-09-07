@@ -100,7 +100,7 @@ final class ExtractorTest extends TestCase
 
     private function getMessageSource()
     {
-        return new class() implements MessageReaderInterface, MessageWriterInterface {
+        return new class () implements MessageReaderInterface, MessageWriterInterface {
             public array $messages = [];
 
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
