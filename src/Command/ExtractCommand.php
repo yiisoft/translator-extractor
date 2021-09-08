@@ -18,8 +18,8 @@ use Yiisoft\Yii\Console\ExitCode;
  */
 final class ExtractCommand extends Command
 {
-    /** @var string|null */
-    protected static $defaultName;
+    protected static $defaultName = 'translator/extract';
+    protected static $defaultDescription = 'Extracts translator IDs from files';
 
     private string $defaultCategory = 'app';
 
@@ -27,7 +27,6 @@ final class ExtractCommand extends Command
 
     public function __construct(Extractor $extractor)
     {
-        self::$defaultName = 'translator/extract';
         $this->extractor = $extractor;
         parent::__construct();
     }
@@ -35,7 +34,6 @@ final class ExtractCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Extracts translator IDs from files.')
             ->addOption('languages', 'L', InputOption::VALUE_OPTIONAL, 'Comma separated list of languages to write message sources for. By default it is `en`.', 'en')
             ->addOption('category', 'C', InputOption::VALUE_OPTIONAL, 'Default message category to use when category is not set.', $this->defaultCategory)
             ->addOption('except', 'E', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Exclude path from extracting.', [])
