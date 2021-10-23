@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Yiisoft\\Translator\\Extractor\\": "src"
+            "Yiisoft\\TranslatorExtractor\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yiisoft\\Translator\\Extractor\\Tests\\": "tests"
+            "Yiisoft\\TranslatorExtractor\\Tests\\": "tests"
         }
     },
     "extra": {

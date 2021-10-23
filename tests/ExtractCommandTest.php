@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Translator\Extractor\Tests;
+namespace Yiisoft\TranslatorExtractor\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Psr\Container\ContainerInterface;
-use Yiisoft\Translator\Extractor\Command\ExtractCommand;
-use Yiisoft\Translator\Extractor\Extractor;
+use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
+use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Di\Container;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
