@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Translator\Extractor;
+namespace Yiisoft\TranslatorExtractor;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Yiisoft\Files\PathMatcher\PathMatcher;
+use Yiisoft\Translator\Extractor\TranslationExtractor;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
 

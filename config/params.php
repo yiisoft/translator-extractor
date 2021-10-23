@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Yiisoft\Translator\Extractor\Command\ExtractCommand;
+use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
 
 return [
     'yiisoft/yii-console' => [

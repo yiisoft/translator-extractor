@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Yiisoft\Definitions\DynamicReference;
-use Yiisoft\Translator\Extractor\Extractor;
+use Yiisoft\TranslatorExtractor\Extractor;
 
 /** @var array $params */
 

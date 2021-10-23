@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Translator\Extractor\Tests;
+namespace Yiisoft\TranslatorExtractor\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yiisoft\Translator\Extractor\Extractor;
+use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
 
