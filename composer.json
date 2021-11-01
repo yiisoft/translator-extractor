@@ -20,7 +20,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "yiisoft/yii-console": "^3.0@dev",
+        "yiisoft/yii-console": "^1.0",
         "yiisoft/translator": "^1.0"
     },
     "require-dev": {
