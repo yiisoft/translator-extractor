@@ -81,7 +81,7 @@ final class ExtractCommandTest extends TestCase
     private function configContainer(): void
     {
         $config = ContainerConfig::create()
-            ->withDefinitions($this->config());
+            ->withDefinitions($this->getDefinitions());
         $this->container = new Container($config);
         $this->application = $this->container->get(Application::class);
 
@@ -95,7 +95,7 @@ final class ExtractCommandTest extends TestCase
         $this->application->setCommandLoader($loader);
     }
 
-    private function config(): array
+    private function getDefinitions(): array
     {
         return [
             Extractor::class => [
