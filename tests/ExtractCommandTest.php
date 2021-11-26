@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Psr\Container\ContainerInterface;
+use Yiisoft\Di\ContainerConfig;
 use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
 use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Di\Container;
@@ -77,9 +78,11 @@ final class ExtractCommandTest extends TestCase
         $this->assertStringContainsString('Languages: ru, en', $output);
     }
 
-    protected function configContainer(): void
+    private function configContainer(): void
     {
-        $this->container = new Container($this->config());
+        $config = ContainerConfig::create()
+            ->withDefinitions($this->getDefinitions());
+        $this->container = new Container($config);
         $this->application = $this->container->get(Application::class);
 
         $loader = new ContainerCommandLoader(
@@ -92,7 +95,7 @@ final class ExtractCommandTest extends TestCase
         $this->application->setCommandLoader($loader);
     }
 
-    private function config(): array
+    private function getDefinitions(): array
     {
         return [
             Extractor::class => [
