@@ -9,6 +9,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Psr\Container\ContainerInterface;
 use Yiisoft\Di\ContainerConfig;
+use Yiisoft\TranslatorExtractor\CategorySource;
 use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
 use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Di\Container;
@@ -100,9 +101,11 @@ final class ExtractCommandTest extends TestCase
         return [
             Extractor::class => [
                 '__construct()' => [
-                    'messageReader' => $this->getMessageSource(),
-                    'messageWriter' => $this->getMessageSource(),
-                ],
+                    [
+                        new CategorySource('app', $this->getMessageSource(), $this->getMessageSource()),
+                        new CategorySource('app2', $this->getMessageSource(), $this->getMessageSource()),
+                    ]
+                ]
             ],
         ];
     }
