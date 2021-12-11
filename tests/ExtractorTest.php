@@ -21,9 +21,14 @@ final class ExtractorTest extends TestCase
     /** @var CategorySource[] */
     private $categorySource;
 
-    private array $correctMessages = [
+    private array $correctMessagesApp = [
         'test' => ['message' => 'test'],
         'test2' => ['message' => 'test2'],
+    ];
+
+    private array $correctMessagesApp2 = [
+        'test_app2' => ['message' => 'test_app2'],
+        'test2_app2' => ['message' => 'test2_app2'],
     ];
 
     private array $changedMessages = [
@@ -38,12 +43,6 @@ final class ExtractorTest extends TestCase
         $this->output->setVerbosity(OutputInterface::VERBOSITY_QUIET);
     }
 
-    private function initCategory(string $category, array $messages = []): void
-    {
-        $this->categorySource[$category] = $this->getCategorySource($category, $messages);
-        $this->extractor = new Extractor($this->categorySource);
-    }
-
     public function testEmpty(): void
     {
         $categoryName = 'app';
@@ -51,6 +50,7 @@ final class ExtractorTest extends TestCase
         $this->initCategory($categoryName);
 
         $this->extractor->process(__DIR__ . '/empty', $categoryName, [$language], $this->output);
+
         $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
     }
 
@@ -61,8 +61,9 @@ final class ExtractorTest extends TestCase
         $this->initCategory($categoryName);
 
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
+
         $this->assertEquals(
-            $this->correctMessages,
+            $this->correctMessagesApp,
             $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language)
         );
     }
@@ -75,6 +76,7 @@ final class ExtractorTest extends TestCase
 
         $this->extractor->setExcept(['**/**.php']);
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
+
         $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
     }
 
@@ -86,6 +88,7 @@ final class ExtractorTest extends TestCase
 
         $this->extractor->setOnly(['**/1.php']);
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
+
         $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
     }
 
@@ -97,13 +100,56 @@ final class ExtractorTest extends TestCase
         $this->initCategory($categoryName);
 
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language1, $language2], $this->output);
+
         $this->assertEquals(
-            $this->correctMessages,
+            $this->correctMessagesApp,
             $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language1)
         );
         $this->assertEquals(
-            $this->correctMessages,
+            $this->correctMessagesApp,
             $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language2)
+        );
+    }
+
+    public function testSimpleWithTwoCategories(): void
+    {
+        $categoryName1 = 'app';
+        $categoryName2 = 'app2';
+        $language = 'en';
+
+        $this->initCategory($categoryName1);
+        $this->initCategory($categoryName2);
+
+        $this->extractor->process(__DIR__ . '/multi-categories', $categoryName1, [$language], $this->output);
+
+        $this->assertEquals(
+            $this->correctMessagesApp,
+            $this->categorySource[$categoryName1]->getReader()->getMessages($categoryName1, $language)
+        );
+        $this->assertEquals(
+            $this->correctMessagesApp2,
+            $this->categorySource[$categoryName2]->getReader()->getMessages($categoryName2, $language)
+        );
+    }
+
+    public function testSimpleWithOnlySecondCategory(): void
+    {
+        $categoryName1 = 'app';
+        $categoryName2 = 'app2';
+        $language = 'en';
+
+        $this->initCategory($categoryName1);
+        $this->initCategory($categoryName2);
+
+        $this->extractor->process(__DIR__ . '/multi-categories/app2', $categoryName1, [$language], $this->output);
+
+        $this->assertEquals(
+            [],
+            $this->categorySource[$categoryName1]->getReader()->getMessages($categoryName1, $language)
+        );
+        $this->assertEquals(
+            $this->correctMessagesApp2,
+            $this->categorySource[$categoryName2]->getReader()->getMessages($categoryName2, $language)
         );
     }
 
@@ -114,10 +160,17 @@ final class ExtractorTest extends TestCase
         $this->initCategory($categoryName, [$categoryName => [$language => $this->changedMessages]]);
 
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
+
         $this->assertEquals(
             'test_changed',
             $this->categorySource[$categoryName]->getReader()->getMessage('test', $categoryName, $language)
         );
+    }
+
+    private function initCategory(string $category, array $messages = []): void
+    {
+        $this->categorySource[$category] = $this->getCategorySource($category, $messages);
+        $this->extractor = new Extractor($this->categorySource);
     }
 
     private function getCategorySource(string $category, array $messages = []): CategorySource
