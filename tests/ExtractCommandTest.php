@@ -114,7 +114,7 @@ final class ExtractCommandTest extends TestCase
                     [
                         new CategorySource('app', $this->getMessageSource(), $this->getMessageSource()),
                         new CategorySource('app2', $this->getMessageSource(), $this->getMessageSource()),
-                    ]
+                    ],
                 ]
             ],
         ];
@@ -127,7 +127,7 @@ final class ExtractCommandTest extends TestCase
                 '__construct()' => [
                     [
                         new CategorySource('app2', $this->getMessageSource(), $this->getMessageSource()),
-                    ]
+                    ],
                 ]
             ],
         ];

@@ -7,8 +7,6 @@ namespace Yiisoft\TranslatorExtractor;
 use Symfony\Component\Console\Output\OutputInterface;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 use Yiisoft\Translator\Extractor\TranslationExtractor;
-use Yiisoft\Translator\MessageReaderInterface;
-use Yiisoft\Translator\MessageWriterInterface;
 
 /**
  * Extracts translator IDs from files within a given path and writes them into message source given merging

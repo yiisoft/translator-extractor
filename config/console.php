@@ -22,7 +22,7 @@ return [
                     DynamicReference::to(static function () {
                         throw new \RuntimeException('You should configure MessageWriter.');
                     }),
-                )
+                ),
             ]
         ],
     ],
