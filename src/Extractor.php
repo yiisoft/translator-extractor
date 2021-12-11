@@ -72,7 +72,7 @@ final class Extractor
     public function process(string $filesPath, string $defaultCategory, array $languages, OutputInterface $output): void
     {
         if (!isset($this->categorySources[$defaultCategory])) {
-            $output->writeln('<comment>Default category not found in list of Categories</comment>');
+            $output->writeln('<comment>Default category was not found in a list of Categories.</comment>');
             return;
         }
 
