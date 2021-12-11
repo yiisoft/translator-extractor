@@ -25,7 +25,7 @@ final class CategorySource
     public function __construct(string $name, MessageReaderInterface $reader, MessageWriterInterface $writer)
     {
         if (!preg_match('/^[a-z0-9_-]+$/i', $name)) {
-            throw new RuntimeException('Category name is invalid. Only letters and numbers are allowed.');
+            throw new RuntimeException('Category name is invalid. Only letters, numbers, dash, and underscore are allowed.');
         }
         $this->name = $name;
         $this->reader = $reader;
