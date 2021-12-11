@@ -58,7 +58,7 @@ final class ExtractCommandTest extends TestCase
 
         $this->command->execute(['path' => __DIR__ . '/not-empty']);
         $output = $this->command->getDisplay();
-        $this->assertStringContainsString('Default category not found in list of Categories', $output);
+        $this->assertStringContainsString('Default category was not found in a list of Categories.', $output);
     }
 
     public function testExcept(): void

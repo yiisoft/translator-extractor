@@ -105,10 +105,10 @@ final class Extractor
 
     private function addMessages(string $categoryName, string $language, array $messages): void
     {
-        $readMessages = $this->categorySources[$categoryName]->getReader()->getMessages($categoryName, $language);
+        $readMessages = $this->categorySources[$categoryName]->readMessages($categoryName, $language);
         /** @var array<string, array<string, string>> $convertedMessages */
         $convertedMessages = array_merge($messages, $readMessages);
-        $this->categorySources[$categoryName]->getWriter()->write($categoryName, $language, $convertedMessages);
+        $this->categorySources[$categoryName]->writeMessages($categoryName, $language, $convertedMessages);
     }
 
     private function convert(array $messages): array

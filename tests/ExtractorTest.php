@@ -51,7 +51,7 @@ final class ExtractorTest extends TestCase
 
         $this->extractor->process(__DIR__ . '/empty', $categoryName, [$language], $this->output);
 
-        $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
+        $this->assertEquals([], $this->categorySource[$categoryName]->readMessages($categoryName, $language));
     }
 
     public function testSimple(): void
@@ -64,7 +64,7 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language)
         );
     }
 
@@ -77,7 +77,7 @@ final class ExtractorTest extends TestCase
         $this->extractor->setExcept(['**/**.php']);
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
 
-        $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
+        $this->assertEquals([], $this->categorySource[$categoryName]->readMessages($categoryName, $language));
     }
 
     public function testOnly(): void
@@ -89,7 +89,7 @@ final class ExtractorTest extends TestCase
         $this->extractor->setOnly(['**/1.php']);
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
 
-        $this->assertEquals([], $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language));
+        $this->assertEquals([], $this->categorySource[$categoryName]->readMessages($categoryName, $language));
     }
 
     public function testSimpleWithTwoLanguages(): void
@@ -103,11 +103,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language1)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language1)
         );
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->getReader()->getMessages($categoryName, $language2)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language2)
         );
     }
 
@@ -124,11 +124,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName1]->getReader()->getMessages($categoryName1, $language)
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
         );
         $this->assertEquals(
             $this->correctMessagesApp2,
-            $this->categorySource[$categoryName2]->getReader()->getMessages($categoryName2, $language)
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
         );
     }
 
@@ -145,15 +145,15 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             [],
-            $this->categorySource[$categoryName1]->getReader()->getMessages($categoryName1, $language)
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
         );
         $this->assertEquals(
             $this->correctMessagesApp2,
-            $this->categorySource[$categoryName2]->getReader()->getMessages($categoryName2, $language)
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
         );
     }
 
-    public function testRewrite(): void
+    public function testNotRewriteExistingTranslations(): void
     {
         $categoryName = 'app';
         $language = 'en';
@@ -162,8 +162,8 @@ final class ExtractorTest extends TestCase
         $this->extractor->process(__DIR__ . '/not-empty', $categoryName, [$language], $this->output);
 
         $this->assertEquals(
-            'test_changed',
-            $this->categorySource[$categoryName]->getReader()->getMessage('test', $categoryName, $language)
+            $this->changedMessages,
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language)
         );
     }
 

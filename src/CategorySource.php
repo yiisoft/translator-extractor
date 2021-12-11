@@ -40,13 +40,13 @@ final class CategorySource
         return $this->name;
     }
 
-    public function getReader(): MessageReaderInterface
+    public function readMessages(string $category, string $locale): array
     {
-        return $this->reader;
+        return $this->reader->getMessages($category, $locale);
     }
 
-    public function getWriter(): MessageWriterInterface
+    public function writeMessages(string $category, string $locale, array $messages): void
     {
-        return $this->writer;
+        $this->writer->write($category, $locale, $messages);
     }
 }
