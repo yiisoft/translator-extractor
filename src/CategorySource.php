@@ -9,7 +9,7 @@ use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
 
 /**
- * Represents message category for read and write messages
+ * Represents message category for reading and writing messages.
  */
 final class CategorySource
 {
@@ -46,9 +46,8 @@ final class CategorySource
      *
      * @psalm-return array<string, array<string, string>>
      *
-     * @return array All messages from category. The format is the following:
-     *
-     * @see \Yiisoft\Translator\MessageReaderInterface::getMessages()
+     * @return array All messages from category. The format is
+     * the same as in {@see \Yiisoft\Translator\MessageReaderInterface::getMessages()}.
      */
     public function readMessages(string $category, string $locale): array
     {
@@ -56,9 +55,9 @@ final class CategorySource
     }
 
     /**
-     * @param string $category
-     * @param string $locale
-     * @param array $messages
+     * @param string $category Category to write messages to.
+     * @param string $locale Locale to write messages for.
+     * @param array $messages Messages to write.
      *
      * @psalm-param array<string, array<string, string>> $messages
      *
