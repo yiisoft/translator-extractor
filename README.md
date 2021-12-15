@@ -43,8 +43,16 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
-            'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
+            [
+                DynamicReference::to([
+                    'class' => ExtractorCategorySource::class,
+                    '__construct()' => [
+                        'app',
+                        'messageReader' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
+                        'messageWriter' => DynamicReference::to(static fn () => new MessageSource($params['yiisoft/translator-extractor']['messagePath'])),
+                    ],
+                ]),
+            ],
         ],
     ],
 ];
@@ -74,8 +82,16 @@ use \Yiisoft\Translator\Message\Php\MessageSource;
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
-            'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+            [
+                DynamicReference::to([
+                    'class' => ExtractorCategorySource::class,
+                    '__construct()' => [
+                        'app',
+                        'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+                        'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+                    ],
+                ]),
+            ],
         ],
     ],
 ];
