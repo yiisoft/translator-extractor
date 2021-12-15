@@ -16,23 +16,26 @@ class IncorrectConfigException extends \RuntimeException implements FriendlyExce
     public function getSolution(): ?string
     {
         return <<<'SOLUTION'
-            Need configure list of CategorySource in your config file.
-            For example:
-            ApplicationExtractorCategorySource::class => [
-                'class' => Yiisoft\TranslatorExtractor\CategorySource::class,
-                '__construct()' => [
-                    'name' => $params['yiisoft/translator']['defaultCategory'],
-                    Reference::to(MessageReader::class),
-                    Reference::to(MessageWriter::class),
-                ],
-            ],
-            Extractor::class => [
-                '__construct()' => [
-                    [
-                        Reference::to(ApplicationExtractorCategorySource::class),
+CategorySource to be used should be specified in your console config file:
+
+return [
+    Extractor::class => [
+        '__construct()' => [
+            'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+            'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+            [
+                DynamicReference::to([
+                    'class' => ExtractorCategorySource::class,
+                    '__construct()' => [
+                        'app',
+                        'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
+                        'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
                     ],
-                ],
+                ]),
             ],
+        ],
+    ],
+];
             SOLUTION;
     }
 }
