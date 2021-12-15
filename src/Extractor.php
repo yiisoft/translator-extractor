@@ -7,8 +7,6 @@ namespace Yiisoft\TranslatorExtractor;
 use Symfony\Component\Console\Output\OutputInterface;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 use Yiisoft\Translator\Extractor\TranslationExtractor;
-use Yiisoft\Translator\MessageReaderInterface;
-use Yiisoft\Translator\MessageWriterInterface;
 
 /**
  * Extracts translator IDs from files within a given path and writes them into message source given merging
@@ -16,9 +14,6 @@ use Yiisoft\Translator\MessageWriterInterface;
  */
 final class Extractor
 {
-    private MessageWriterInterface $messageWriter;
-    private MessageReaderInterface $messageReader;
-
     /** @var string[]|null */
     private ?array $except = null;
 
@@ -26,13 +21,18 @@ final class Extractor
     private ?array $only = null;
 
     /**
-     * @param MessageReaderInterface $messageReader Message reader to get messages from.
-     * @param MessageWriterInterface $messageWriter Message writer to write messages to.
+     * @var CategorySource[] Array of category message sources indexed by category names.
      */
-    public function __construct(MessageReaderInterface $messageReader, MessageWriterInterface $messageWriter)
+    private array $categorySources = [];
+
+    /**
+     * @param CategorySource[] $categories
+     */
+    public function __construct(array $categories)
     {
-        $this->messageReader = $messageReader;
-        $this->messageWriter = $messageWriter;
+        foreach ($categories as $category) {
+            $this->categorySources[$category->getName()] = $category;
+        }
     }
 
     /**
@@ -71,6 +71,11 @@ final class Extractor
      */
     public function process(string $filesPath, string $defaultCategory, array $languages, OutputInterface $output): void
     {
+        if (!isset($this->categorySources[$defaultCategory])) {
+            $output->writeln('<comment>Default category was not found in a list of Categories.</comment>');
+            return;
+        }
+
         $translationExtractor = new TranslationExtractor($filesPath, $this->only, $this->except);
 
         $messagesList = $translationExtractor->extract($defaultCategory);
@@ -92,11 +97,18 @@ final class Extractor
             /** @var array<string, array<string, string>> $convertedMessages */
             $convertedMessages = $this->convert($messages);
             foreach ($languages as $language) {
-                $readMessages = $this->messageReader->getMessages($categoryName, $language);
-                $convertedMessages = array_merge($convertedMessages, $readMessages);
-                $this->messageWriter->write($categoryName, $language, $convertedMessages);
+                $extractCategory = isset($this->categorySources[$categoryName]) ? $categoryName : $defaultCategory;
+                $this->addMessages($extractCategory, $language, $convertedMessages);
             }
         }
+    }
+
+    private function addMessages(string $categoryName, string $language, array $messages): void
+    {
+        $readMessages = $this->categorySources[$categoryName]->readMessages($categoryName, $language);
+        /** @var array<string, array<string, string>> $convertedMessages */
+        $convertedMessages = array_merge($messages, $readMessages);
+        $this->categorySources[$categoryName]->writeMessages($categoryName, $language, $convertedMessages);
     }
 
     private function convert(array $messages): array

@@ -9,6 +9,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Psr\Container\ContainerInterface;
 use Yiisoft\Di\ContainerConfig;
+use Yiisoft\TranslatorExtractor\CategorySource;
 use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
 use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Di\Container;
@@ -26,7 +27,7 @@ final class ExtractCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->configContainer();
+        $this->configContainer($this->getDefinitions());
 
         $this->command = new CommandTester($this->application->find('translator/extract'));
     }
@@ -48,6 +49,16 @@ final class ExtractCommandTest extends TestCase
         $this->command->execute(['path' => __DIR__ . '/not-empty']);
         $output = $this->command->getDisplay();
         $this->assertStringContainsString('Category: "app", messages found: 2', $output);
+    }
+
+    public function testWithoutDefaultCategory(): void
+    {
+        $this->configContainer($this->getWithoutDefaultCategoryDefinitions());
+        $this->command = new CommandTester($this->application->find('translator/extract'));
+
+        $this->command->execute(['path' => __DIR__ . '/not-empty']);
+        $output = $this->command->getDisplay();
+        $this->assertStringContainsString('Default category was not found in a list of Categories.', $output);
     }
 
     public function testExcept(): void
@@ -78,10 +89,10 @@ final class ExtractCommandTest extends TestCase
         $this->assertStringContainsString('Languages: ru, en', $output);
     }
 
-    private function configContainer(): void
+    private function configContainer(array $definitions): void
     {
         $config = ContainerConfig::create()
-            ->withDefinitions($this->getDefinitions());
+            ->withDefinitions($definitions);
         $this->container = new Container($config);
         $this->application = $this->container->get(Application::class);
 
@@ -100,8 +111,23 @@ final class ExtractCommandTest extends TestCase
         return [
             Extractor::class => [
                 '__construct()' => [
-                    'messageReader' => $this->getMessageSource(),
-                    'messageWriter' => $this->getMessageSource(),
+                    [
+                        new CategorySource('app', $this->getMessageSource(), $this->getMessageSource()),
+                        new CategorySource('app2', $this->getMessageSource(), $this->getMessageSource()),
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    private function getWithoutDefaultCategoryDefinitions(): array
+    {
+        return [
+            Extractor::class => [
+                '__construct()' => [
+                    [
+                        new CategorySource('app2', $this->getMessageSource(), $this->getMessageSource()),
+                    ],
                 ],
             ],
         ];
