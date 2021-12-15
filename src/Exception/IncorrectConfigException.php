@@ -6,7 +6,7 @@ namespace Yiisoft\TranslatorExtractor\Exception;
 
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
-class IncorrectConfigException extends \RuntimeException implements FriendlyExceptionInterface
+class NoCategorySourceConfigException extends \RuntimeException implements FriendlyExceptionInterface
 {
     public function getName(): string
     {
