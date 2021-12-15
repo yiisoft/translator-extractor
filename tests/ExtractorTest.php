@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Yiisoft\TranslatorExtractor\CategorySource;
-use Yiisoft\TranslatorExtractor\Exception\IncorrectConfigException;
+use Yiisoft\TranslatorExtractor\Exception\NoCategorySourceConfigException;
 use Yiisoft\TranslatorExtractor\Extractor;
 use Yiisoft\Translator\MessageReaderInterface;
 use Yiisoft\Translator\MessageWriterInterface;
@@ -57,7 +57,7 @@ final class ExtractorTest extends TestCase
 
     public function testEmptyCategorySource(): void
     {
-        $this->expectException(IncorrectConfigException::class);
+        $this->expectException(NoCategorySourceConfigException::class);
 
         $this->extractor = new Extractor([]);
     }
