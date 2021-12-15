@@ -10,7 +10,7 @@ class IncorrectConfigException extends \RuntimeException implements FriendlyExce
 {
     public function getName(): string
     {
-        return 'Need configure list of CategorySource';
+        return 'Please provide a list of CategorySource';
     }
 
     public function getSolution(): ?string
