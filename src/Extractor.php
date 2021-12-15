@@ -7,6 +7,7 @@ namespace Yiisoft\TranslatorExtractor;
 use Symfony\Component\Console\Output\OutputInterface;
 use Yiisoft\Files\PathMatcher\PathMatcher;
 use Yiisoft\Translator\Extractor\TranslationExtractor;
+use Yiisoft\TranslatorExtractor\Exception\IncorrectConfigException;
 
 /**
  * Extracts translator IDs from files within a given path and writes them into message source given merging
@@ -30,6 +31,10 @@ final class Extractor
      */
     public function __construct(array $categories)
     {
+        if (empty($categories)) {
+            throw new IncorrectConfigException();
+        }
+
         foreach ($categories as $category) {
             $this->categorySources[$category->getName()] = $category;
         }
