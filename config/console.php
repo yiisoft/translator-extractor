@@ -25,7 +25,7 @@ return [
                             throw new \RuntimeException('You should configure MessageWriter.');
                         }),
                     ],
-                ])
+                ]),
             ],
         ],
     ],
