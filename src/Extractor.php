@@ -16,7 +16,7 @@ use Yiisoft\TranslatorExtractor\Exception\NoCategorySourceConfigException;
 final class Extractor
 {
     /** @var string[]|null */
-    private ?array $except = null;
+    private ?array $except = ['./vendor/**'];
 
     /** @var string[]|null */
     private ?array $only = null;
@@ -81,7 +81,11 @@ final class Extractor
             return;
         }
 
-        $translationExtractor = new TranslationExtractor($filesPath, $this->only, $this->except);
+        $translationExtractor = new TranslationExtractor(
+            $filesPath,
+            $this->applyRoot($this->only, $filesPath),
+            $this->applyRoot($this->except, $filesPath)
+        );
 
         $messagesList = $translationExtractor->extract($defaultCategory);
 
@@ -126,5 +130,19 @@ final class Extractor
         }
 
         return $returningMessages;
+    }
+
+    private function applyRoot(?array $list, $rootFolder): ?array
+    {
+        if (is_array($list)) {
+            return array_map(
+                static function ($except) use ($rootFolder): string {
+                    return preg_replace('#^(\./)#', $rootFolder . '/', $except);
+                },
+                $list
+            );
+        }
+
+        return $list;
     }
 }
