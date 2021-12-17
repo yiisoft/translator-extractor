@@ -101,7 +101,7 @@ final class Extractor
          * @var array<array-key, array<string, string>|mixed> $messages
          */
         foreach ($messagesList as $categoryName => $messages) {
-            $output->writeln('<info>Category: "' . $categoryName . '", messages found: ' . count($messages) . '</info>');
+            $output->writeln('<info>Category: "' . $categoryName . '", messages found: ' . count($messages) . '.</info>');
 
             /** @var array<string, array<string, string>> $convertedMessages */
             $convertedMessages = $this->convert($messages);

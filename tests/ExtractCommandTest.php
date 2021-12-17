@@ -41,7 +41,7 @@ final class ExtractCommandTest extends TestCase
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty']);
         $output = $this->command->getDisplay();
-        $this->assertStringContainsString('Category: "app", messages found: 2', $output);
+        $this->assertStringContainsString('Category: "app", messages found: 2.', $output);
     }
 
     public function testWithoutDefaultCategory(): void

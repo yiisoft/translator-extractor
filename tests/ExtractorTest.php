@@ -149,7 +149,8 @@ final class ExtractorTest extends TestCase
         $this->initCategory($categoryName1);
         $this->initCategory($categoryName2);
 
-        $this->extractor->process(__DIR__ . '/multi-categories/app2', $categoryName1, [$language], $this->output);
+        $this->extractor->setOnly(['./app2/**']);
+        $this->extractor->process(__DIR__ . '/multi-categories', $categoryName1, [$language], $this->output);
 
         $this->assertEquals(
             [],
