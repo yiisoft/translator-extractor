@@ -143,7 +143,7 @@ final class Extractor
         if (is_array($list)) {
             return array_map(
                 static function (string $except) use ($rootFolder): string {
-                    return preg_replace('#^(\./)#', $rootFolder . DIRECTORY_SEPARATOR, $except);
+                    return preg_replace('#^\./#', $rootFolder . DIRECTORY_SEPARATOR, $except);
                 },
                 $list
             );
