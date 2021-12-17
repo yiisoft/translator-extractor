@@ -32,7 +32,7 @@ final class CategoryTest extends TestCase
         return [
             ['testcategoryname'],
             ['testCategoryName'],
-            ['testCategory1Name']
+            ['testCategory1Name'],
         ];
     }
 
