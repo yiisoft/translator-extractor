@@ -113,7 +113,7 @@ a message source for default language `en`. You can specify the path explicitly:
 php yii translator/extract /path/to/your/project
 ```
 
-**Notice:** By default we exclude folder `vendor` in root folder. For remove this behaviour you can specify empty value of `except`
+**Notice:** By default extractor has `vendor` directory in the application directory excludede. To include it you can specify empty value for `except`:
 ```shell
 php yii translator/extract /path/to/your/project --except=''
 ```
@@ -162,7 +162,7 @@ php yii translator/extract --category=your_category_name
 
 ### Using `except` option
 
-To exclude all folders with name `dir1` directory use `--except`:
+To exclude all directories named `dir1` use `--except`:
 
 ```shell
 php yii translator/extract --except=**/dir1/**
