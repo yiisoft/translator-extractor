@@ -7,7 +7,6 @@ namespace Yiisoft\TranslatorExtractor\Tests;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use Psr\Container\ContainerInterface;
 use Yiisoft\Di\ContainerConfig;
 use Yiisoft\TranslatorExtractor\CategorySource;
 use Yiisoft\TranslatorExtractor\Command\ExtractCommand;
