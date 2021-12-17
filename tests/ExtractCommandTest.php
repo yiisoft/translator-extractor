@@ -19,7 +19,6 @@ use Yiisoft\Yii\Console\Application;
 
 final class ExtractCommandTest extends TestCase
 {
-    private ContainerInterface $container;
     private Application $application;
     private CommandTester $command;
 
@@ -30,11 +29,6 @@ final class ExtractCommandTest extends TestCase
         $this->configContainer($this->getDefinitions());
 
         $this->command = new CommandTester($this->application->find('translator/extract'));
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
     }
 
     public function testEmpty(): void
@@ -75,14 +69,14 @@ final class ExtractCommandTest extends TestCase
         $this->assertStringContainsString('Messages not found', $output);
     }
 
-    public function testSimpleWithSettedCategory(): void
+    public function testSimpleWithSetCategory(): void
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty', '--category' => 'app2']);
         $output = $this->command->getDisplay();
         $this->assertStringContainsString('Category: "app2", messages found: 2', $output);
     }
 
-    public function testSimpleWithSettedLanguages(): void
+    public function testSimpleWithSetLanguages(): void
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty', '-L' => 'ru,en']);
         $output = $this->command->getDisplay();
@@ -93,11 +87,11 @@ final class ExtractCommandTest extends TestCase
     {
         $config = ContainerConfig::create()
             ->withDefinitions($definitions);
-        $this->container = new Container($config);
-        $this->application = $this->container->get(Application::class);
+        $container = new Container($config);
+        $this->application = $container->get(Application::class);
 
         $loader = new ContainerCommandLoader(
-            $this->container,
+            $container,
             [
                 'translator/extract' => ExtractCommand::class,
             ]

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Yiisoft\TranslatorExtractor\Exception;
 
+use RuntimeException;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
-class NoCategorySourceConfigException extends \RuntimeException implements FriendlyExceptionInterface
+class NoCategorySourceConfigException extends RuntimeException implements FriendlyExceptionInterface
 {
     public function getName(): string
     {

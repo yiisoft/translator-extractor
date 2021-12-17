@@ -20,7 +20,7 @@ final class ExtractorTest extends TestCase
     private ConsoleOutputInterface $output;
 
     /** @var CategorySource[] */
-    private $categorySource;
+    private array $categorySource;
 
     private array $correctMessagesApp = [
         'test' => ['message' => 'test'],
