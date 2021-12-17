@@ -113,7 +113,7 @@ a message source for default language `en`. You can specify the path explicitly:
 php yii translator/extract /path/to/your/project
 ```
 
-**Notice:** By default extractor has `vendor` directory in the application directory excludede. To include it you can specify empty value for `except`:
+**Notice:** By default extractor has `vendor` directory in the application directory excluded. To include it you can specify empty value for `except`:
 ```shell
 php yii translator/extract /path/to/your/project --except=''
 ```

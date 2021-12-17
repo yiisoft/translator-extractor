@@ -132,11 +132,16 @@ final class Extractor
         return $returningMessages;
     }
 
-    private function applyRoot(?array $list, $rootFolder): ?array
+    /**
+     * @param string[]|null $list
+     * @param string $rootFolder
+     * @return string[]|null
+     */
+    private function applyRoot(?array $list, string $rootFolder): ?array
     {
         if (is_array($list)) {
             return array_map(
-                static function ($except) use ($rootFolder): string {
+                static function (string $except) use ($rootFolder): string {
                     return preg_replace('#^(\./)#', $rootFolder . '/', $except);
                 },
                 $list
