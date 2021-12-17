@@ -135,6 +135,7 @@ final class Extractor
     /**
      * @param string[]|null $list
      * @param string $rootFolder
+     *
      * @return string[]|null
      */
     private function applyRoot(?array $list, string $rootFolder): ?array
