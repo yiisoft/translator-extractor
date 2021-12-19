@@ -62,6 +62,16 @@ final class ExtractorTest extends TestCase
         $this->extractor = new Extractor([]);
     }
 
+    public function testEmptyCategorySourceException(): void
+    {
+        try {
+            $this->extractor = new Extractor([]);
+        } catch (NoCategorySourceConfigException $e) {
+            $this->assertEquals('Please provide a list of CategorySource', $e->getName());
+            $this->assertStringContainsString('CategorySource to be used should be specified in your console config file', $e->getSolution());
+        }
+    }
+
     public function testSimple(): void
     {
         $categoryName = 'app';
@@ -136,6 +146,28 @@ final class ExtractorTest extends TestCase
         );
         $this->assertEquals(
             $this->correctMessagesApp2,
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
+        );
+    }
+
+    public function testSimpleWithExceptSecondCategory(): void
+    {
+        $categoryName1 = 'app';
+        $categoryName2 = 'app2';
+        $language = 'en';
+
+        $this->initCategory($categoryName1);
+        $this->initCategory($categoryName2);
+
+        $this->extractor->setExcept(['./app2/**']);
+        $this->extractor->process(__DIR__ . '/multi-categories', $categoryName1, [$language], $this->output);
+
+        $this->assertEquals(
+            $this->correctMessagesApp,
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
+        );
+        $this->assertEquals(
+            [],
             $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
         );
     }
