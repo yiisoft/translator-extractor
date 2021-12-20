@@ -31,9 +31,7 @@ composer require yiisoft/translator-extractor
 
 ## Configuration
 
-You need configure `MessageReader` and `MessageWriter` in config file of the package:
-
-`config/packages/yiisoft/translator-extractor/console.php`
+You need configure `MessageReader` and `MessageWriter` in config file of the package, `config/console/translator-extractor.php`:
 
 For example, when using PHP `MessageSource` the config will be the following using **relative path**:
 
