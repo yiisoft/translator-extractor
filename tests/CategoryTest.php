@@ -12,13 +12,28 @@ use Yiisoft\Translator\MessageWriterInterface;
 
 final class CategoryTest extends TestCase
 {
-    public function testName(): void
+    /**
+     * @dataProvider nameProvider
+     */
+    public function testName(string $categoryName): void
     {
         $this->assertInstanceOf(CategorySource::class, new CategorySource(
-            'testcategoryname',
+            $categoryName,
             $this->createMessageReader(),
             $this->createMessageWriter()
         ));
+    }
+
+    /**
+     * @return \string[][]
+     */
+    public function nameProvider(): array
+    {
+        return [
+            ['testcategoryname'],
+            ['testCategoryName'],
+            ['testCategory1Name'],
+        ];
     }
 
     public function testNameException(): void
