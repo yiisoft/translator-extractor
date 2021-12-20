@@ -26,7 +26,7 @@ The package allows automatically extracting translation IDs from PHP source file
 The package could be installed with composer:
 
 ```shell
-composer require yiisoft/translator-extractor --prefer-dist
+composer require yiisoft/translator-extractor
 ```
 
 ## Configuration
@@ -103,19 +103,19 @@ return [
 ## General usage
 
 ```shell
-php yii translator/extract
+./yii translator/extract
 ```
 
 This command will recursively find all messages in the code starting with the current directory and will save it into
 a message source for default language `en`. You can specify the path explicitly:
 
 ```shell
-php yii translator/extract /path/to/your/project
+./yii translator/extract /path/to/your/project
 ```
 
 **Notice:** By default extractor has `vendor` directory in the application directory excluded. To include it you can specify empty value for `except`:
 ```shell
-php yii translator/extract /path/to/your/project --except=''
+./yii translator/extract /path/to/your/project --except=''
 ```
 
 Full list of options:
@@ -141,13 +141,13 @@ Options:
 You can specify multiple languages to write IDs into:
 
 ```shell
-php yii translator/extract --languages=en,ru
+./yii translator/extract --languages=en,ru
 ```
 
 Or in short format:
 
 ```shell
-php yii translator/extract -Lru
+./yii translator/extract -Lru
 ```
 
 
@@ -156,7 +156,7 @@ php yii translator/extract -Lru
 Also, you can specify default message category to use when category is not set.
 
 ```shell
-php yii translator/extract --category=your_category_name
+./yii translator/extract --category=your_category_name
 ```
 
 
@@ -165,13 +165,13 @@ php yii translator/extract --category=your_category_name
 To exclude all directories named `dir1` use `--except`:
 
 ```shell
-php yii translator/extract --except=**/dir1/**
+./yii translator/extract --except=**/dir1/**
 ```
 
 To exclude both `vendor` and `tests` directories the following options could be used:
 
 ```shell
-php yii translator/extract --except=./vendor/** --except=./tests/**
+./yii translator/extract --except=./vendor/** --except=./tests/**
 ```
 
 ### Using `only` option
@@ -179,13 +179,13 @@ php yii translator/extract --except=./vendor/** --except=./tests/**
 To parse only `test.php` files in any directory use `--only` option:
 
 ```shell
-php yii translator/extract --only=**/test.php
+./yii translator/extract --only=**/test.php
 ```
 
 To parse only `/var/www/html/test.php` file use:
 
 ```shell
-php yii translator/extract --only=/var/www/html/test.php
+./yii translator/extract --only=/var/www/html/test.php
 ```
 
 For more info about `except` and `only` parameters check documentation of
