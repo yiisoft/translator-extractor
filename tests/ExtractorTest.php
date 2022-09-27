@@ -223,11 +223,8 @@ final class ExtractorTest extends TestCase
     private function getReaderWriter(array $messages = [])
     {
         return new class ($messages) implements MessageReaderInterface, MessageWriterInterface {
-            public array $messages;
-
-            public function __construct(array $messages = [])
+            public function __construct(public array $messages = [])
             {
-                $this->messages = $messages;
             }
 
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
