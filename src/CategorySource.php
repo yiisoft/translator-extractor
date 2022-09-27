@@ -14,22 +14,16 @@ use Yiisoft\Translator\MessageWriterInterface;
 final class CategorySource
 {
     private string $name;
-    private MessageReaderInterface $reader;
-    private MessageWriterInterface $writer;
 
     /**
      * @param string $name Category name.
-     * @param MessageReaderInterface $reader
-     * @param MessageWriterInterface $writer
      */
-    public function __construct(string $name, MessageReaderInterface $reader, MessageWriterInterface $writer)
+    public function __construct(string $name, private MessageReaderInterface $reader, private MessageWriterInterface $writer)
     {
         if (!preg_match('/^[a-z0-9_-]+$/i', $name)) {
             throw new RuntimeException('Category name is invalid. Only letters, numbers, dash, and underscore are allowed.');
         }
         $this->name = $name;
-        $this->reader = $reader;
-        $this->writer = $writer;
     }
 
     /**
