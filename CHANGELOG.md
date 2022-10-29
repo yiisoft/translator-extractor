@@ -2,7 +2,7 @@
 
 ## 1.0.1 under development
 
-- no changes in this release.
+- Enh #18: Raise minimum PHP version to `^8.0` (@vjik, @xepozz)
 
 ## 1.0.0 December 20, 2021
 
