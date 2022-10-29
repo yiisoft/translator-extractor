@@ -18,7 +18,7 @@
         "source": "https://github.com/yiisoft/translator-extractor"
     },
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "yiisoft/yii-console": "^1.0",
         "yiisoft/friendly-exception": "^1.0",
         "yiisoft/translator": "^1.0"
