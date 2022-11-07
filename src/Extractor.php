@@ -72,7 +72,6 @@ final class Extractor
      * @param string $filesPath Path to files to extract from.
      * @param string $defaultCategory Category to use if category isn't set in translation call.
      * @param string[] $languages Languages to write extracted IDs to.
-     * @param OutputInterface $output
      */
     public function process(string $filesPath, string $defaultCategory, array $languages, OutputInterface $output): void
     {
@@ -134,7 +133,6 @@ final class Extractor
 
     /**
      * @param string[]|null $list
-     * @param string $rootFolder
      *
      * @return string[]|null
      */
@@ -142,9 +140,7 @@ final class Extractor
     {
         if (is_array($list)) {
             return array_map(
-                static function (string $except) use ($rootFolder): string {
-                    return preg_replace('#^\./#', $rootFolder . '/', $except);
-                },
+                static fn (string $except): string => preg_replace('#^\./#', $rootFolder . '/', $except),
                 $list
             );
         }

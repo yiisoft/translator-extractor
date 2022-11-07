@@ -23,11 +23,8 @@ final class ExtractCommand extends Command
 
     private string $defaultCategory = 'app';
 
-    private Extractor $extractor;
-
-    public function __construct(Extractor $extractor)
+    public function __construct(private Extractor $extractor)
     {
-        $this->extractor = $extractor;
         parent::__construct();
     }
 
