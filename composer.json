@@ -19,11 +19,13 @@
     },
     "require": {
         "php": "^8.0",
-        "yiisoft/yii-console": "^1.0",
+        "symfony/console": "^5.4|^6.0",
         "yiisoft/friendly-exception": "^1.0",
-        "yiisoft/translator": "^1.0"
+        "yiisoft/translator": "^1.0",
+        "yiisoft/yii-console": "^1.0"
     },
     "require-dev": {
+        "maglnet/composer-require-checker": "^4.2",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.14.3",
         "roave/infection-static-analysis-plugin": "^1.16",
