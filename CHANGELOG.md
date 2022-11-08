@@ -1,5 +1,9 @@
 # Yii Message Extractor Change Log
 
+## 1.1.1 under development
+
+- no changes in this release.
+
 ## 1.1.0 November 08, 2022
 
 - Enh #18: Raise minimum PHP version to `^8.0` (@vjik, @xepozz)
