@@ -1,8 +1,9 @@
 # Yii Message Extractor Change Log
 
-## 1.1.1 under development
+## 2.0.0 under development
 
-- no changes in this release.
+- Chg #31: Adapt configuration group names to Yii conventions (@vjik)
+- Enh #31: Improve solution in `NoCategorySourceConfigException` (@vjik)
 
 ## 1.1.0 November 08, 2022
 
