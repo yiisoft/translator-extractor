@@ -68,7 +68,10 @@ final class ExtractorTest extends TestCase
             $this->extractor = new Extractor([]);
         } catch (NoCategorySourceConfigException $e) {
             $this->assertEquals('Please provide a list of CategorySource', $e->getName());
-            $this->assertStringContainsString('CategorySource to be used should be specified in your console config file', $e->getSolution());
+            $this->assertStringContainsString(
+                '`CategorySource` to be used should be specified in your console container definitions file:',
+                $e->getSolution()
+            );
         }
     }
 
