@@ -17,26 +17,23 @@ class NoCategorySourceConfigException extends RuntimeException implements Friend
     public function getSolution(): ?string
     {
         return <<<'SOLUTION'
-CategorySource to be used should be specified in your console config file:
+`CategorySource` to be used should be specified in your console container definitions file:
+
+```php
+use Yiisoft\Definitions\DynamicReferencesArray;
+use Yiisoft\Translator\Message\Php\MessageSource;
+use Yiisoft\TranslatorExtractor\Extractor;
 
 return [
     Extractor::class => [
         '__construct()' => [
-            'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
-            'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
-            [
-                DynamicReference::to([
-                    'class' => ExtractorCategorySource::class,
-                    '__construct()' => [
-                        'app',
-                        'messageReader' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
-                        'messageWriter' => DynamicReference::to(static fn (Aliases $aliases) => new MessageSource($aliases->get('@message'))),
-                    ],
-                ]),
-            ],
+            DynamicReferencesArray::from([
+                static fn (Aliases $aliases) => new MessageSource($aliases->get('@message')),
+            ])
         ],
     ],
 ];
+```
 SOLUTION;
     }
 }
