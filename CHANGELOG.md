@@ -1,11 +1,11 @@
 # Yii Message Extractor Change Log
 
-## 2.0.0 under development
+## 2.0.0 February 17, 2023
 
 - Chg #31: Adapt configuration group names to Yii conventions (@vjik)
+- Chg #34: Make `yiisoft/yii-console` dependency for development only (@vjik)
 - Enh #31: Improve solution in `NoCategorySourceConfigException` (@vjik)
 - Enh #33: Add support of `yiisoft/translator` version `^3.0` (@vjik)
-- Chg #34: Make `yiisoft/yii-console` dependency for development only (@vjik) 
 
 ## 1.1.0 November 08, 2022
 
