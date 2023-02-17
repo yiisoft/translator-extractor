@@ -5,6 +5,7 @@
 - Chg #31: Adapt configuration group names to Yii conventions (@vjik)
 - Enh #31: Improve solution in `NoCategorySourceConfigException` (@vjik)
 - Enh #33: Add support of `yiisoft/translator` version `^3.0` (@vjik)
+- Chg #34: Make `yiisoft/yii-console` dependency for development only (@vjik) 
 
 ## 1.1.0 November 08, 2022
 
