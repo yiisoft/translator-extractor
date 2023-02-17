@@ -9,9 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
 use Yiisoft\TranslatorExtractor\Extractor;
-use Yiisoft\Yii\Console\ExitCode;
 
 /**
  * Console command that allows extracting translator IDs from files.
@@ -64,6 +62,6 @@ final class ExtractCommand extends Command
 
         $this->extractor->process($path, $category, $languagesList, $output);
 
-        return ExitCode::OK;
+        return 0;
     }
 }
