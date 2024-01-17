@@ -28,6 +28,7 @@ final class Extractor
 
     /**
      * @param CategorySource[] $categories
+     * @param string $translatorCall Translation call to look for.
      */
     public function __construct(array $categories, private string $translatorCall = '->translate')
     {
