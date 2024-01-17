@@ -2,7 +2,7 @@
 
 ## 2.0.1 under development
 
-- Enh #42: Add ability to change the calling method in translator extractor. 
+- Enh #42: Add ability to change the calling method in translator extractor (@terabytesoftw)
 
 ## 2.0.0 February 17, 2023
 
