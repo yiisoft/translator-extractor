@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\TranslatorExtractor\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,11 +15,9 @@ use Yiisoft\TranslatorExtractor\Extractor;
 /**
  * Console command that allows extracting translator IDs from files.
  */
+#[AsCommand('translator/extract', 'Extracts translator IDs from files')]
 final class ExtractCommand extends Command
 {
-    protected static $defaultName = 'translator/extract';
-    protected static $defaultDescription = 'Extracts translator IDs from files';
-
     private string $defaultCategory = 'app';
 
     public function __construct(private Extractor $extractor)
