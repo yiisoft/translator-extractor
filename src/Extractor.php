@@ -28,8 +28,9 @@ final class Extractor
 
     /**
      * @param CategorySource[] $categories
+     * @param string $translatorCall Translation call to look for.
      */
-    public function __construct(array $categories)
+    public function __construct(array $categories, private string $translatorCall = '->translate')
     {
         if (empty($categories)) {
             throw new NoCategorySourceConfigException();
@@ -86,7 +87,7 @@ final class Extractor
             $this->applyRoot($this->except, $filesPath)
         );
 
-        $messagesList = $translationExtractor->extract($defaultCategory);
+        $messagesList = $translationExtractor->extract($defaultCategory, $this->translatorCall);
 
         if (empty($messagesList)) {
             $output->writeln('<comment>Messages not found</comment>');
