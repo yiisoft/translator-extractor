@@ -3,7 +3,7 @@
 ## 2.0.1 under development
 
 - Enh #42: Add ability to change the calling method in translator extractor (@terabytesoftw)
-- Enh #43: Add support of `symfony/console` version `7.0` (@terabytesoftw)
+- Enh #43, #45: Add support of `symfony/console` version `^7.0` (@terabytesoftw, @vjik)
 
 ## 2.0.0 February 17, 2023
 
