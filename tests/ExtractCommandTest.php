@@ -68,6 +68,13 @@ final class ExtractCommandTest extends TestCase
         $this->assertStringContainsString('Messages not found', $output);
     }
 
+    public function testResult(): void
+    {
+        $result = $this->command->execute(['path' => __DIR__ . '/not-empty']);
+
+        $this->assertSame(0, $result);
+    }
+
     public function testSimpleWithSetCategory(): void
     {
         $this->command->execute(['path' => __DIR__ . '/not-empty', '--category' => 'app2']);

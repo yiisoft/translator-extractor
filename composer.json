@@ -19,7 +19,7 @@
     },
     "require": {
         "php": "^8.0",
-        "symfony/console": "^5.4|^6.0",
+        "symfony/console": "^5.4|^6.0|7.0",
         "yiisoft/friendly-exception": "^1.0",
         "yiisoft/translator": "^1.0|^2.0|^3.0"
     },
@@ -60,6 +60,11 @@
         }
     },
     "scripts": {
+        "mutation": [
+            "Composer\\Config::disableProcessTimeout",
+            "roave-infection-static-analysis-plugin"
+        ],
+        "psalm": "psalm",
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"
     }
