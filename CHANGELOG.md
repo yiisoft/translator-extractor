@@ -1,6 +1,6 @@
 # Yii Message Extractor Change Log
 
-## 2.0.1 under development
+## 2.1.0 January 18, 2024
 
 - Enh #42: Add ability to change the calling method in translator extractor (@terabytesoftw)
 - Enh #43, #45: Add support of `symfony/console` version `^7.0` (@terabytesoftw, @vjik)
