@@ -1,5 +1,9 @@
 # Yii Message Extractor Change Log
 
+## 2.1.1 under development
+
+- no changes in this release.
+
 ## 2.1.0 January 18, 2024
 
 - Enh #42: Add ability to change the calling method in translator extractor (@terabytesoftw)
