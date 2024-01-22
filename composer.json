@@ -5,7 +5,8 @@
     "keywords": [
         "i18n",
         "internationalization",
-        "extractor"
+        "extractor",
+        "dev"
     ],
     "homepage": "https://www.yiiframework.com/",
     "license": "BSD-3-Clause",
