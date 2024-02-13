@@ -1,6 +1,6 @@
 # Yii Message Extractor Change Log
 
-## 2.1.1 under development
+## 2.1.1 February 13, 2024
 
 - Enh #47: Add "dev" keyword to composer.json for suggest package to require-dev section (@samdark)
 
