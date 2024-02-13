@@ -2,7 +2,7 @@
 
 ## 2.1.1 under development
 
-- no changes in this release.
+- Enh #47: Add "dev" keyword to composer.json for suggest package to require-dev section (@samdark)
 
 ## 2.1.0 January 18, 2024
 
