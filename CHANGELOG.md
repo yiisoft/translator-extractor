@@ -1,4 +1,4 @@
-# Yii Message Extractor Change Log
+# Yii Translator Message Extractor Change Log
 
 ## 2.1.2 under development
 
