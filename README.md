@@ -3,7 +3,7 @@
         <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
 </p>
-<h1 align="center">Yii Message Extractor</h1>
+<h1 align="center">Yii Translator Message Extractor</h1>
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/translator-extractor/v/stable.png)](https://packagist.org/packages/yiisoft/translator-extractor)
 [![Total Downloads](https://poser.pugx.org/yiisoft/translator-extractor/downloads.png)](https://packagist.org/packages/yiisoft/translator-extractor)
@@ -215,7 +215,7 @@ You may also check out other [Yii Community Resources](https://www.yiiframework.
 
 ## License
 
-The Yii Message Extractor is free software. It is released under the terms of the BSD License. Please
+The Yii Translator Message Extractor is free software. It is released under the terms of the BSD License. Please
 see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
