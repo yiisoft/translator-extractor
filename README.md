@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
 </p>
 <h1 align="center">Yii Message Extractor</h1>
@@ -23,7 +23,7 @@ The package allows automatically extracting translation IDs from PHP source file
 
 ## Installation
 
-The package could be installed with composer:
+The package could be installed with [Composer](https://getcomposer.org):
 
 ```shell
 composer require yiisoft/translator-extractor
@@ -96,7 +96,6 @@ return [
 ];
 ```
 
-
 > **Attention**: Both `MessageReader` and `MessageWriter` should be configured for using _the same_ `MessageSource`. The extractor needs it to work with existing messages.
 
 ## General usage
@@ -113,6 +112,7 @@ a message source for default language `en`. You can specify the path explicitly:
 ```
 
 **Notice:** By default extractor has `vendor` directory in the application directory excluded. To include it you can specify empty value for `except`:
+
 ```shell
 ./yii translator/extract /path/to/your/project --except=''
 ```
@@ -134,7 +134,6 @@ Options:
 
 ```
 
-
 ### Specify languages
 
 You can specify multiple languages to write IDs into:
@@ -149,7 +148,6 @@ Or in short format:
 ./yii translator/extract -Lru
 ```
 
-
 ### Specify default category
 
 Also, you can specify default message category to use when category is not set.
@@ -157,7 +155,6 @@ Also, you can specify default message category to use when category is not set.
 ```shell
 ./yii translator/extract --category=your_category_name
 ```
-
 
 ### Using `except` option
 
@@ -209,36 +206,16 @@ for d in locales/*/ ; do
 done
 ```
 
-## Testing
+## Documentation
 
-### Unit testing
+- [Internals](docs/internals.md)
 
-The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
-
-```shell
-./vendor/bin/phpunit
-```
-
-### Mutation testing
-
-The package tests are checked with [Infection](https://infection.github.io/) mutation framework with
-[Infection Static Analysis Plugin](https://github.com/Roave/infection-static-analysis-plugin). To run it:
-
-```shell
-./vendor/bin/roave-infection-static-analysis-plugin
-```
-
-### Static analysis
-
-The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
-
-```shell
-./vendor/bin/psalm
-```
+If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
+You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
 
 ## License
 
-The Yii translator extractor is free software. It is released under the terms of the BSD License. Please
+The Yii Message Extractor is free software. It is released under the terms of the BSD License. Please
 see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
