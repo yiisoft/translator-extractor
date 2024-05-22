@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
 </p>
 <h1 align="center">Yii Translator Message Extractor</h1>
@@ -96,7 +96,6 @@ return [
 ];
 ```
 
-
 > **Attention**: Both `MessageReader` and `MessageWriter` should be configured for using _the same_ `MessageSource`. The extractor needs it to work with existing messages.
 
 ## General usage
@@ -113,6 +112,7 @@ a message source for default language `en`. You can specify the path explicitly:
 ```
 
 **Notice:** By default extractor has `vendor` directory in the application directory excluded. To include it you can specify empty value for `except`:
+
 ```shell
 ./yii translator/extract /path/to/your/project --except=''
 ```
@@ -134,7 +134,6 @@ Options:
 
 ```
 
-
 ### Specify languages
 
 You can specify multiple languages to write IDs into:
@@ -149,7 +148,6 @@ Or in short format:
 ./yii translator/extract -Lru
 ```
 
-
 ### Specify default category
 
 Also, you can specify default message category to use when category is not set.
@@ -157,7 +155,6 @@ Also, you can specify default message category to use when category is not set.
 ```shell
 ./yii translator/extract --category=your_category_name
 ```
-
 
 ### Using `except` option
 
