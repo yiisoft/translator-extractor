@@ -30,7 +30,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "symfony/console": "^8.1.1",
+        "symfony/console": "^5.4|^6.0|^7.0|^8.0",
         "yiisoft/friendly-exception": "^1.0",
         "yiisoft/translator": "^1.0|^2.0|^3.0"
     },
