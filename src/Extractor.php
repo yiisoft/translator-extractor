@@ -141,7 +141,13 @@ final class Extractor
     {
         if (is_array($list)) {
             return array_map(
-                static fn (string $except): string => preg_replace('#^\./#', $rootFolder . '/', $except),
+                static function (string $except) use ($rootFolder): string {
+                    /**
+                     * `preg_replace()` uses the correct regular expression, so the result is always string.
+                     * @var string
+                     */
+                    return preg_replace('#^\./#', $rootFolder . '/', $except);
+                },
                 $list
             );
         }
