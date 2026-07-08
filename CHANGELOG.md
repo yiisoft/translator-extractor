@@ -2,7 +2,7 @@
 
 ## 2.1.2 under development
 
-- no changes in this release.
+- Enh #58: Add `@final` annotation to `NoCategorySourceConfigException` (@vjik)
 
 ## 2.1.1 February 13, 2024
 
