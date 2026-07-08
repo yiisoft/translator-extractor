@@ -20,12 +20,12 @@ final class CategoryTest extends TestCase
         $this->assertInstanceOf(CategorySource::class, new CategorySource(
             $categoryName,
             $this->createMessageReader(),
-            $this->createMessageWriter()
+            $this->createMessageWriter(),
         ));
     }
 
     /**
-     * @return \string[][]
+     * @return string[][]
      */
     public function nameProvider(): array
     {
@@ -43,13 +43,13 @@ final class CategoryTest extends TestCase
         new CategorySource(
             'test Category name',
             $this->createMessageReader(),
-            $this->createMessageWriter()
+            $this->createMessageWriter(),
         );
     }
 
     private function createMessageReader(): MessageReaderInterface
     {
-        return new class () implements MessageReaderInterface {
+        return new class implements MessageReaderInterface {
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
             {
                 return null;
@@ -64,7 +64,7 @@ final class CategoryTest extends TestCase
 
     private function createMessageWriter(): MessageWriterInterface
     {
-        return new class () implements MessageWriterInterface {
+        return new class implements MessageWriterInterface {
             public array $messages;
 
             public function write(string $category, string $locale, array $messages): void

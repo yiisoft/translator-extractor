@@ -36,11 +36,13 @@
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.95",
         "phpunit/phpunit": "^9.6.35",
         "rector/rector": "^2.5",
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^4.30 || ^5.26.1 || ^6.16.1",
+        "yiisoft/code-style": "^1.0",
         "yiisoft/di": "^1.0",
         "yiisoft/yii-console": "^2.0"
     },
@@ -77,11 +79,13 @@
         }
     },
     "scripts": {
+        "cs-fix": "php-cs-fixer fix",
         "mutation": [
             "Composer\\Config::disableProcessTimeout",
             "roave-infection-static-analysis-plugin"
         ],
         "psalm": "psalm",
+        "rector": "rector",
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"
     }

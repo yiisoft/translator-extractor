@@ -70,7 +70,7 @@ final class ExtractorTest extends TestCase
             $this->assertEquals('Please provide a list of CategorySource', $e->getName());
             $this->assertStringContainsString(
                 '`CategorySource` to be used should be specified in your console container definitions file:',
-                $e->getSolution()
+                $e->getSolution(),
             );
         }
     }
@@ -85,7 +85,7 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->readMessages($categoryName, $language)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language),
         );
     }
 
@@ -124,11 +124,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->readMessages($categoryName, $language1)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language1),
         );
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName]->readMessages($categoryName, $language2)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language2),
         );
     }
 
@@ -145,11 +145,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language),
         );
         $this->assertEquals(
             $this->correctMessagesApp2,
-            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language),
         );
     }
 
@@ -167,11 +167,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->correctMessagesApp,
-            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language),
         );
         $this->assertEquals(
             [],
-            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language),
         );
     }
 
@@ -189,11 +189,11 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             [],
-            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language)
+            $this->categorySource[$categoryName1]->readMessages($categoryName1, $language),
         );
         $this->assertEquals(
             $this->correctMessagesApp2,
-            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language)
+            $this->categorySource[$categoryName2]->readMessages($categoryName2, $language),
         );
     }
 
@@ -207,7 +207,7 @@ final class ExtractorTest extends TestCase
 
         $this->assertEquals(
             $this->changedMessages,
-            $this->categorySource[$categoryName]->readMessages($categoryName, $language)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language),
         );
     }
 
@@ -226,9 +226,7 @@ final class ExtractorTest extends TestCase
     private function getReaderWriter(array $messages = [])
     {
         return new class ($messages) implements MessageReaderInterface, MessageWriterInterface {
-            public function __construct(public array $messages = [])
-            {
-            }
+            public function __construct(public array $messages = []) {}
 
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
             {

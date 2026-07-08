@@ -41,7 +41,7 @@ final class CustomCallTest extends TestCase
                 'custom-test' => ['message' => 'custom-test'],
                 'custom-test2' => ['message' => 'custom-test2'],
             ],
-            $this->categorySource[$categoryName]->readMessages($categoryName, $language)
+            $this->categorySource[$categoryName]->readMessages($categoryName, $language),
         );
     }
 
@@ -54,9 +54,7 @@ final class CustomCallTest extends TestCase
     private function getReaderWriter(array $messages = [])
     {
         return new class ($messages) implements MessageReaderInterface, MessageWriterInterface {
-            public function __construct(public array $messages = [])
-            {
-            }
+            public function __construct(public array $messages = []) {}
 
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
             {

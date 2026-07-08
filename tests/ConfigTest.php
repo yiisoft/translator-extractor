@@ -11,6 +11,8 @@ use Yiisoft\Di\ContainerConfig;
 use Yiisoft\TranslatorExtractor\Exception\NoCategorySourceConfigException;
 use Yiisoft\TranslatorExtractor\Extractor;
 
+use function dirname;
+
 final class ConfigTest extends TestCase
 {
     public function testDiConsole(): void
@@ -19,8 +21,8 @@ final class ConfigTest extends TestCase
 
         $this->expectException(BuildingException::class);
         $this->expectExceptionMessage(
-            'Caught unhandled error "' . NoCategorySourceConfigException::class .
-            '" while building "' . Extractor::class . '".'
+            'Caught unhandled error "' . NoCategorySourceConfigException::class
+            . '" while building "' . Extractor::class . '".',
         );
         $container->get(Extractor::class);
     }
@@ -29,8 +31,8 @@ final class ConfigTest extends TestCase
     {
         return new Container(
             ContainerConfig::create()->withDefinitions(
-                $this->getDiConfig($postfix)
-            )
+                $this->getDiConfig($postfix),
+            ),
         );
     }
 

@@ -9,6 +9,9 @@ use Yiisoft\Files\PathMatcher\PathMatcher;
 use Yiisoft\Translator\Extractor\TranslationExtractor;
 use Yiisoft\TranslatorExtractor\Exception\NoCategorySourceConfigException;
 
+use function count;
+use function is_array;
+
 /**
  * Extracts translator IDs from files within a given path and writes them into message source given merging
  * results with what is already there.
@@ -84,7 +87,7 @@ final class Extractor
         $translationExtractor = new TranslationExtractor(
             $filesPath,
             $this->applyRoot($this->only, $filesPath),
-            $this->applyRoot($this->except, $filesPath)
+            $this->applyRoot($this->except, $filesPath),
         );
 
         $messagesList = $translationExtractor->extract($defaultCategory, $this->translatorCall);
@@ -148,7 +151,7 @@ final class Extractor
                      */
                     return preg_replace('#^\./#', $rootFolder . '/', $except);
                 },
-                $list
+                $list,
             );
         }
 

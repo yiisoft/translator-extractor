@@ -100,7 +100,7 @@ final class ExtractCommandTest extends TestCase
             $container,
             [
                 'translator/extract' => ExtractCommand::class,
-            ]
+            ],
         );
 
         $this->application->setCommandLoader($loader);
@@ -135,7 +135,7 @@ final class ExtractCommandTest extends TestCase
 
     private function getMessageSource()
     {
-        return new class () implements MessageReaderInterface, MessageWriterInterface {
+        return new class implements MessageReaderInterface, MessageWriterInterface {
             private array $messages = [];
 
             public function getMessage(string $id, string $category, string $locale, array $parameters = []): ?string
