@@ -4,6 +4,7 @@
 
 - Enh #58: Add `@final` annotation to `NoCategorySourceConfigException` (@vjik)
 - Enh #56, #62: Add support of `symfony/console` version `^8.0` (@vjik)
+- Enh #63: Explicitly import functions in "use" section (@vjik)
 
 ## 2.1.1 February 13, 2024
 

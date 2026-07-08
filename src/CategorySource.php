@@ -19,11 +19,11 @@ final class CategorySource
     public function __construct(
         private string $name,
         private MessageReaderInterface $reader,
-        private MessageWriterInterface $writer
+        private MessageWriterInterface $writer,
     ) {
         if (!preg_match('/^[a-z0-9_-]+$/i', $name)) {
             throw new RuntimeException(
-                'Category name is invalid. Only letters, numbers, dash, and underscore are allowed.'
+                'Category name is invalid. Only letters, numbers, dash, and underscore are allowed.',
             );
         }
     }
@@ -43,7 +43,7 @@ final class CategorySource
      * @psalm-return array<string, array<string, string>>
      *
      * @return array All messages from category. The format is
-     * the same as in {@see \Yiisoft\Translator\MessageReaderInterface::getMessages()}.
+     * the same as in {@see MessageReaderInterface::getMessages()}.
      */
     public function readMessages(string $category, string $locale): array
     {
@@ -57,7 +57,7 @@ final class CategorySource
      *
      * @psalm-param array<string, array<string, string>> $messages
      *
-     * @see \Yiisoft\Translator\MessageWriterInterface::write
+     * @see MessageWriterInterface::write
      */
     public function writeMessages(string $category, string $locale, array $messages): void
     {
