@@ -3,6 +3,7 @@
 ## 2.1.2 under development
 
 - Enh #58: Add `@final` annotation to `NoCategorySourceConfigException` (@vjik)
+- Enh #56, #62: Add support of `symfony/console` version `^8.0` (@vjik)
 
 ## 2.1.1 February 13, 2024
 
