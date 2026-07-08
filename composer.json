@@ -35,7 +35,7 @@
         "yiisoft/translator": "^1.0|^2.0|^3.0"
     },
     "require-dev": {
-        "maglnet/composer-require-checker": "^4.2",
+        "bamarni/composer-bin-plugin": "^1.9.1",
         "phpunit/phpunit": "^9.6.35",
         "rector/rector": "^2.5",
         "roave/infection-static-analysis-plugin": "^1.16",
@@ -61,13 +61,19 @@
         "config-plugin": {
             "params": "params.php",
             "di-console": "di-console.php"
+        },
+        "bamarni-bin": {
+            "bin-links": true,
+            "target-directory": "tools",
+            "forward-command": true
         }
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
             "infection/extension-installer": true,
-            "composer/package-versions-deprecated": true
+            "composer/package-versions-deprecated": true,
+            "bamarni/composer-bin-plugin": true
         }
     },
     "scripts": {
