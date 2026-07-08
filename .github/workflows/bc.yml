@@ -1,8 +1,15 @@
-on:
-  - pull_request
-  - push
-
 name: backwards compatibility
+
+on:
+  pull_request:
+    paths: &paths
+      - 'config/**'
+      - 'src/**'
+      - '.github/workflows/bc.yml'
+      - 'composer.json'
+  push:
+    branches: ['master']
+    paths: *paths
 
 permissions:
   contents: read
@@ -11,7 +18,6 @@ jobs:
   roave_bc_check:
     uses: yiisoft/actions/.github/workflows/bc.yml@master
     with:
-      os: >-
-        ['ubuntu-latest']
       php: >-
         ['8.4']
+
