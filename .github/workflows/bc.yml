@@ -19,5 +19,5 @@ jobs:
     uses: yiisoft/actions/.github/workflows/bc.yml@master
     with:
       php: >-
-        ['8.0']
+        ['8.1']
 
