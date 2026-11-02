@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/roave/backward-compatibility-check/Resources/schema.xsd">
     <baseline>
-        <ignored-regex>#\[BC\] REMOVED: Method Symfony\\Component\\Console\\Command\\Command::getDefaultName\(\) was removed#</ignored-regex>
-        <ignored-regex>#\[BC\] REMOVED: Method Symfony\\Component\\Console\\Command\\Command::getDefaultDescription\(\) was removed#</ignored-regex>
+        <ignored-regex>#\[BC\] REMOVED: Method Yiisoft\\TranslatorExtractor\\Command\\ExtractCommand::getDefaultName\(\) \(inherited from Symfony\\Component\\Console\\Command\\Command\) was removed#</ignored-regex>
+        <ignored-regex>#\[BC\] REMOVED: Method Yiisoft\\TranslatorExtractor\\Command\\ExtractCommand::getDefaultDescription\(\) \(inherited from Symfony\\Component\\Console\\Command\\Command\) was removed#</ignored-regex>
     </baseline>
 </roave-bc-check>
